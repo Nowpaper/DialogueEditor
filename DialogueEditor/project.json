@@ -1,0 +1,8 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "DialogueEditor",
+  "id": "1d27b025-640a-4dcd-a42e-c44531f5f325",
+  "version": "2.4.0",
+  "isNew": false
+}
