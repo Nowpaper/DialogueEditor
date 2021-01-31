@@ -86,6 +86,10 @@ export default class DaiogueNodeSc extends cc.Component {
     onDestroy() {
         this.radio_in.off(cc.Node.EventType.MOUSE_DOWN, this.onRadioMosueDown, this);
         this.radio_next.off(cc.Node.EventType.MOUSE_DOWN, this.onRadioMosueDown, this);
+        cc.systemEvent.off(MsgerNames.MS_DialogueSubContnetDEL, this.onDaiogueSubContenetDel, this);
+        cc.systemEvent.off(MsgerNames.MS_DialogueSubContnetUP, this.onDaiogueSubContenetUp, this);
+        cc.systemEvent.off(MsgerNames.MS_DialogueSubContnetDOWN, this.onDaiogueSubContenetDown, this);
+        cc.systemEvent.off(MsgerNames.MS_DialogueSubContnetENDED, this.onDaiogueSubContenetEnded, this);
     }
     removeFromStage() {
         const redo = () => {
