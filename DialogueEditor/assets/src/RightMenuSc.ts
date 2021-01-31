@@ -34,15 +34,15 @@ export default class RightMenuSc extends cc.Component {
         this.updateUI();
     }
     updateUI() {
-        this.addButton.active = this.delButton.active = false;
-        switch (this.label.string) {
-            case '节点':
-                this.delButton.active = this.addButton.active = true;
-                break;
-            case '连接线':
-                this.delButton.active = true;
-                break;
-        }
+        // this.addButton.active = this.delButton.active = false;
+        // switch (this.label.string) {
+        //     case '节点':
+        //         this.delButton.active = this.addButton.active = true;
+        //         break;
+        //     case '连接线':
+        //         this.delButton.active = true;
+        //         break;
+        // }
     }
     closeMenu() {
         this.isOpen = false;
