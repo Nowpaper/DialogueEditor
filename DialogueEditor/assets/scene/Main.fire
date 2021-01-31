@@ -93,10 +93,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 59
+        "__id__": 60
       },
       {
-        "__id__": 60
+        "__id__": 61
       }
     ],
     "_prefab": null,
@@ -1763,7 +1763,7 @@
       "__id__": 43
     },
     "redoButton": {
-      "__id__": 50
+      "__id__": 51
     },
     "_id": "17LzzvSmlAmoaHEwii2RaO"
   },
@@ -1778,10 +1778,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 56
+        "__id__": 57
       },
       {
-        "__id__": 57
+        "__id__": 58
       }
     ],
     "_prefab": null,
@@ -1844,16 +1844,16 @@
         "__id__": 43
       },
       {
-        "__id__": 50
+        "__id__": 51
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 54
+        "__id__": 55
       },
       {
-        "__id__": 55
+        "__id__": 56
       }
     ],
     "_prefab": null,
@@ -1923,6 +1923,9 @@
     "_components": [
       {
         "__id__": 49
+      },
+      {
+        "__id__": 50
       }
     ],
     "_prefab": null,
@@ -2127,6 +2130,16 @@
     "_id": "a2MbBqSj9BIqMhX7mMdHmy"
   },
   {
+    "__type__": "cc.BlockInputEvents",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 45
+    },
+    "_enabled": true,
+    "_id": "bfi5LrhdlPbKKVryObCluP"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "redo",
     "_objFlags": 0,
@@ -2137,10 +2150,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 51
+        "__id__": 52
       },
       {
-        "__id__": 52
+        "__id__": 53
       }
     ],
     "_prefab": null,
@@ -2196,7 +2209,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 51
     },
     "_enabled": true,
     "_materials": [
@@ -2228,7 +2241,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 51
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -2237,7 +2250,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 53
+        "__id__": 54
       }
     ],
     "_N$interactable": true,
@@ -2414,7 +2427,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 58
+        "__id__": 59
       }
     ],
     "_N$interactable": true,
