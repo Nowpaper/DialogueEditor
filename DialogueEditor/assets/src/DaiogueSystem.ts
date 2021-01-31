@@ -16,15 +16,46 @@ export module DaiogueSystem {
         from: number;
         to: number;
     }
+    /** 用来存储的数据结构 */
+    class SaveData {
+        version: string;
+        daiogues: DaiogueData[];
+        contacts: ContactData[];
+        time: number;
+        idCount:number;
+    }
     /** 对话自定义数据类 */
     export class DaiogueCustomData {
         data;
         events;
     }
     /** 对话保存组 */
-    export const daiogueArray: DaiogueData[] = [];
-    export const contactArray: ContactData[] = []
+    export let daiogueArray: DaiogueData[] = [];
+    export let contactArray: ContactData[] = []
     let idCount = 0;
+    /** 获取当前数据 */
+    export function getData(): any {
+        const data = new SaveData();
+        data.version = "0.1";
+        data.daiogues = daiogueArray;
+        data.contacts = contactArray;
+        data.time = Date.now();
+        data.idCount = idCount;
+        return data;
+    }
+    /** 打开数据，并作同步处理 */
+    export function openData(jsonString: string): any {
+        try {
+            const data: SaveData = JSON.parse(jsonString);
+            daiogueArray = data.daiogues;
+            contactArray = data.contacts;
+            idCount = data.idCount;
+            return data;
+        } catch {
+            return null;
+        }
+    }
+    /** 获得一个对话，从ID */
     export function getDaiogueFromID(id: number) {
         const find = daiogueArray.filter((value) => {
             return value.id == id;
@@ -36,8 +67,8 @@ export module DaiogueSystem {
     }
     /** 添加一个对话数据,data可能是已经存在的数据,理论上这玩意不能在外部创建 */
     export function addDaiogue(data = null): DaiogueData {
-        if(data){
-            daiogueArray.push(data);   
+        if (data) {
+            daiogueArray.push(data);
             return data;
         }
         const daiogueData = new DaiogueData();
