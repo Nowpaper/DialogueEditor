@@ -42,6 +42,7 @@ export default class FileNodeUISc extends cc.Component {
         const upload = document.createElement('input');
         upload.type = 'file';
         document.body.appendChild(upload);
+        upload.style.display = 'none';
         upload.onchange = () => {
             // uploadOnChange
             const file = upload.files[0];
