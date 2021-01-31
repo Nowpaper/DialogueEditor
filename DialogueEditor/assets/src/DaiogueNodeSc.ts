@@ -74,7 +74,7 @@ export default class DaiogueNodeSc extends cc.Component {
         );
         redo();
     }
-    /** 鼠标点击时候的处理 */
+    /** 鼠标点击到连接点时候的处理 */
     private onRadioMosueDown(e: cc.Event.EventMouse) {
         if (e.currentTarget) {
             StageSc.Current.contactFromDaiogueNode(this, e.currentTarget, e.currentTarget == this.radio_next);

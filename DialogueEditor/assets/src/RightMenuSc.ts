@@ -17,7 +17,10 @@ export default class RightMenuSc extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
     // LIFE-CYCLE CALLBACKS:
-
+    @property(cc.Node)
+    addButton: cc.Node = null;
+    @property(cc.Node)
+    delButton: cc.Node = null;
     // onLoad () {}
     isOpen = false;
     private _rightTarget: cc.Node = null;
@@ -28,6 +31,18 @@ export default class RightMenuSc extends cc.Component {
         this.node.x = pt.x + this.node.width / 2.5;
         this.node.y = pt.y - this.node.height / 2.5;
         this.isOpen = true;
+        this.updateUI();
+    }
+    updateUI() {
+        this.addButton.active = this.delButton.active = false;
+        switch (this.label.string) {
+            case '节点':
+                this.delButton.active = this.addButton.active = true;
+                break;
+            case '连接线':
+                this.delButton.active = true;
+                break;
+        }
     }
     closeMenu() {
         this.isOpen = false;
@@ -70,6 +85,7 @@ export default class RightMenuSc extends cc.Component {
                     this.node.x = (pt.x + this.node.width / 2.5) * StageSc.Current.node.scale;
                     this.node.y = (pt.y - this.node.height / 2.5) * StageSc.Current.node.scale;
                     this.label.string = "连接线";
+                    this.updateUI();
                 } else {
                     this.node.y = 2000;
                 }
