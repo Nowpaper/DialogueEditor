@@ -13,6 +13,9 @@ export default class FileNodeUISc extends cc.Component {
     @property(cc.EditBox)
     fileData: cc.EditBox = null;
 
+    @property(cc.EditBox)
+    fileName: cc.EditBox = null;
+
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -33,15 +36,34 @@ export default class FileNodeUISc extends cc.Component {
         }
         data.nodesPos = nodesPos;
         this.fileData.string = JSON.stringify(data);
+        this.fileName.string = "DE_" + Date.now();
     }
     onClickOpen() {
-
+        const upload = document.createElement('input');
+        upload.type = 'file';
+        document.body.appendChild(upload);
+        upload.onchange = () => {
+            // uploadOnChange
+            const file = upload.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.fileData.string = reader.result as string;
+            }
+            reader.readAsText(file);
+        };
+        upload.click();
     }
     onClickSave() {
-
+        const str = this.fileData.string;
+        const data = new Blob([str], { type: "text/plain;charset=UTF-8" });
+        const downloadurl = window.URL.createObjectURL(data);
+        const anchor = document.createElement("a");
+        anchor.href = downloadurl;
+        anchor.download = this.fileName.string + ".json";
+        anchor.click();
+        window.URL.revokeObjectURL(<any>data);
     }
     onClickClose() {
-
         this.node.active = false;
     }
     /** 将数据应用到当前场景 */
