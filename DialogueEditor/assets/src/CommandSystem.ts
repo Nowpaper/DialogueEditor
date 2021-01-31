@@ -12,6 +12,11 @@ export module CommandSystem {
         undoCount = 0;
         return command;
     }
+    /** 清理掉所有的指令数据 */
+    export function clearCommands() {
+        undoCount = 0;
+        CommandArray.splice(0, CommandArray.length);
+    }
     export function undo() {
         undoCount += 1;
         CommandArray[CommandArray.length - undoCount].undo();
