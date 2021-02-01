@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import RightMenuSc from "./RightMenuSc";
+import StageSc from "./StageSc";
 
 const { ccclass, property } = cc._decorator;
 
@@ -28,7 +29,11 @@ export default class MouseRightButtonSc extends cc.Component {
         if (e.getButton() == cc.Event.EventMouse.BUTTON_RIGHT) {
             const rightMenu = cc.find('Canvas/Right Menu');
             if (rightMenu) {
-                rightMenu.getComponent(RightMenuSc).openMenu('节点',e, this.node);
+                if(StageSc.Current.pickupLine){
+                    rightMenu.getComponent(RightMenuSc).openMenu('连接线',e, this.node);
+                }else{
+                    rightMenu.getComponent(RightMenuSc).openMenu('节点',e, this.node);
+                }
             }
         }
     }

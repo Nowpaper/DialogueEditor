@@ -30,9 +30,11 @@ export default class FileNodeUISc extends cc.Component {
         const data = DaiogueSystem.getData();
         const nodesPos = [];
         for (let item of array) {
-            nodesPos.push({
-                id: item.Data.id, posX: item.node.x, posY: item.node.y
-            });
+            if(item.node.active){
+                nodesPos.push({
+                    id: item.Data.id, posX: item.node.x, posY: item.node.y
+                });
+            }
         }
         data.nodesPos = nodesPos;
         this.fileData.string = JSON.stringify(data);

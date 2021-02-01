@@ -92,15 +92,33 @@ export default class DaiogueNodeSc extends cc.Component {
         cc.systemEvent.off(MsgerNames.MS_DialogueSubContnetENDED, this.onDaiogueSubContenetEnded, this);
     }
     removeFromStage() {
+        const fromArray = DaiogueSystem.contactArray.filter((value) => { return value.from == this.Data.id });
+        const toArray = DaiogueSystem.contactArray.filter((value) => { return value.to == this.Data.id });
         const redo = () => {
             DaiogueSystem.delDaiogue(this.Data);
             this.node.active = false;
+            for (let from of fromArray) {
+                this.discontactDaigueNode(StageSc.Current.getDaiogueNodeFromId(from.to));
+                // StageSc.Current.disconnectTowDaiogueNode(StageSc.Current.getDaiogueNodeFromId(from.from), this, true);
+            }
+            for (let to of toArray) {
+                StageSc.Current.getDaiogueNodeFromId(to.from).discontactDaigueNode(this);
+                // StageSc.Current.disconnectTowDaiogueNode(StageSc.Current.getDaiogueNodeFromId(to.to), this, true);
+            }
         }
         CommandSystem.CreateCommandAdd(
             "删除",
             () => {
                 DaiogueSystem.addDaiogue(this.Data);
                 this.node.active = true;
+                for (let from of fromArray) {
+                    this.contactDaigueNode(StageSc.Current.getDaiogueNodeFromId(from.to));
+                    // StageSc.Current.contactTowDaiogueNode(StageSc.Current.getDaiogueNodeFromId(from.from), this, true);
+                }
+                for (let to of toArray) {
+                    StageSc.Current.getDaiogueNodeFromId(to.from).contactDaigueNode(this);;
+                    // StageSc.Current.contactTowDaiogueNode(StageSc.Current.getDaiogueNodeFromId(to.to), this, true);
+                }
             },
             redo
         );

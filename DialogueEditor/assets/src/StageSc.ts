@@ -224,12 +224,10 @@ export default class StageSc extends cc.Component {
         addNode.y = pt.y;
         addNode.getComponent(DaiogueNodeSc).setData();
 
-        //添加指令处理
-        const self = this;
+        //添加指令处理        
         CommandSystem.addCommand({
             tag: "添加对话",
             redo: () => {
-                // self.node.addChild(addNode);
                 addNode.active = true;
                 DaiogueSystem.addDaiogue(addNode.getComponent(DaiogueNodeSc).Data);
             },
@@ -238,6 +236,39 @@ export default class StageSc extends cc.Component {
                 DaiogueSystem.delDaiogue(addNode.getComponent(DaiogueNodeSc).Data);
             }
         })
+    }
+    public addDaiogueNodeOnContact() {
+        if (this.pickupLine) {
+            const pt = this.node.convertToNodeSpaceAR(cc.v2(this.pickupLine.mouseX, this.pickupLine.mouseY));
+            const addNode = cc.instantiate(this.daioguePrefab);
+            this.node.addChild(addNode);
+            addNode.x = pt.x;
+            addNode.y = pt.y;
+            addNode.getComponent(DaiogueNodeSc).setData();
+            const self = this;
+            const from = self.pickupLine.from;
+            const to = self.pickupLine.to;
+            const redo = () => {
+                addNode.active = true;
+                DaiogueSystem.addDaiogue(addNode.getComponent(DaiogueNodeSc).Data);
+                self.contactTowDaiogueNode(from, addNode.getComponent(DaiogueNodeSc), true);
+                self.contactTowDaiogueNode(addNode.getComponent(DaiogueNodeSc), to, true);
+                self.disconnectTowDaiogueNode(from, to, true);
+            }
+            CommandSystem.addCommand({
+                tag: "添加对话",
+                redo,
+                undo: () => {
+                    addNode.active = false;
+                    DaiogueSystem.delDaiogue(addNode.getComponent(DaiogueNodeSc).Data);
+                    self.disconnectTowDaiogueNode(from, addNode.getComponent(DaiogueNodeSc), true);
+                    self.disconnectTowDaiogueNode(addNode.getComponent(DaiogueNodeSc), to, true);
+                    self.contactTowDaiogueNode(from, to, true);
+                }
+            })
+            redo();
+            this.pickupLine = null;
+        }
     }
     /** 通过ID找到一个对话节点 */
     public getDaiogueNodeFromId(id: number): DaiogueNodeSc {

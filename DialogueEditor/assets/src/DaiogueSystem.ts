@@ -81,13 +81,6 @@ export module DaiogueSystem {
         const index = daiogueArray.indexOf(data);
         if (index >= 0) {
             daiogueArray.splice(index, 1);
-            //应该把所有链接全部移除，移除了的话就意味着不能恢复了，所以保存的时候应该处理是否存在连接
-            // const arr = contactArray.filter((value) => {
-            //     return value.from == data.id || value.to == data.id;
-            // })
-            // for (let a of arr) {
-            //     contactArray.splice(arr.indexOf(a), 1);
-            // }
         }
         return false;
     }

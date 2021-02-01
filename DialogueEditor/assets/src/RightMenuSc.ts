@@ -31,18 +31,6 @@ export default class RightMenuSc extends cc.Component {
         this.node.x = pt.x + this.node.width / 2.5;
         this.node.y = pt.y - this.node.height / 2.5;
         this.isOpen = true;
-        this.updateUI();
-    }
-    updateUI() {
-        // this.addButton.active = this.delButton.active = false;
-        // switch (this.label.string) {
-        //     case '节点':
-        //         this.delButton.active = this.addButton.active = true;
-        //         break;
-        //     case '连接线':
-        //         this.delButton.active = true;
-        //         break;
-        // }
     }
     closeMenu() {
         this.isOpen = false;
@@ -57,7 +45,9 @@ export default class RightMenuSc extends cc.Component {
             //有数据说明是一个对话数据块，方便为里面添加
             if (this._rightTarget.getComponent(DaiogueNodeSc)) {
 
-            } else {
+            } if(StageSc.Current.pickupLine){
+                StageSc.Current.addDaiogueNodeOnContact();
+            }else {
                 StageSc.Current.addDaiogueNode(e.getLocation());
             }
         }
@@ -77,21 +67,21 @@ export default class RightMenuSc extends cc.Component {
         this.closeMenu();
     }
     update(dt) {
-        if (StageSc.Current) {
-            if (!this.isOpen) {
-                this.node.opacity = StageSc.Current.pickupLine != null ? 255 : 0;
-                if (this.node.opacity >= 255) {
-                    const pt = StageSc.Current.node.convertToNodeSpaceAR(cc.v2(StageSc.Current.pickupLine.mouseX, StageSc.Current.pickupLine.mouseY));
-                    this.node.x = (pt.x + this.node.width / 2.5) * StageSc.Current.node.scale;
-                    this.node.y = (pt.y - this.node.height / 2.5) * StageSc.Current.node.scale;
-                    this.label.string = "连接线";
-                    this.updateUI();
-                } else {
-                    this.node.y = 2000;
-                }
-            } else {
-                this.node.opacity = 255;
-            }
-        }
+        // if (StageSc.Current) {
+        //     if (!this.isOpen) {
+        //         this.node.opacity = StageSc.Current.pickupLine != null ? 255 : 0;
+        //         if (this.node.opacity >= 255) {
+        //             const pt = StageSc.Current.node.convertToNodeSpaceAR(cc.v2(StageSc.Current.pickupLine.mouseX, StageSc.Current.pickupLine.mouseY));
+        //             this.node.x = (pt.x + this.node.width / 2.5) * StageSc.Current.node.scale;
+        //             this.node.y = (pt.y - this.node.height / 2.5) * StageSc.Current.node.scale;
+        //             this.label.string = "连接线";
+        //             this.updateUI();
+        //         } else {
+        //             this.node.y = 2000;
+        //         }
+        //     } else {
+        //         this.node.opacity = 255;
+        //     }
+        // }
     }
 }
