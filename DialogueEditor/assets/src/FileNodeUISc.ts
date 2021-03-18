@@ -30,7 +30,7 @@ export default class FileNodeUISc extends cc.Component {
         const data = DaiogueSystem.getData();
         const nodesPos = [];
         for (let item of array) {
-            if(item.node.active){
+            if (item.node.active) {
                 nodesPos.push({
                     id: item.Data.id, posX: item.node.x, posY: item.node.y
                 });
@@ -40,6 +40,7 @@ export default class FileNodeUISc extends cc.Component {
         this.fileData.string = JSON.stringify(data);
         this.fileName.string = "DE_" + Date.now();
     }
+    /** 打开文件 */
     onClickOpen() {
         const upload = document.createElement('input');
         upload.type = 'file';
@@ -52,10 +53,12 @@ export default class FileNodeUISc extends cc.Component {
             reader.onload = () => {
                 this.fileData.string = reader.result as string;
             }
+            document.body.removeChild(upload);
             reader.readAsText(file);
         };
         upload.click();
     }
+    /** 保存文件 */
     onClickSave() {
         const str = this.fileData.string;
         const data = new Blob([str], { type: "text/plain;charset=UTF-8" });
@@ -66,6 +69,7 @@ export default class FileNodeUISc extends cc.Component {
         anchor.click();
         window.URL.revokeObjectURL(<any>data);
     }
+    /** 关闭 */
     onClickClose() {
         this.node.active = false;
     }
