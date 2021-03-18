@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { CommandSystem } from "./CommandSystem";
+import CustomPropertiesUISc from "./CustomPropertiesUISc";
 import { DaiogueSystem } from "./DaiogueSystem";
 import DialogueSubContnetSc from "./DialogueSubContnetSc";
 import { MsgerNames } from "./Msger";
@@ -293,5 +294,8 @@ export default class DaiogueNodeSc extends cc.Component {
             redo
         )
         redo();
+    }
+    onClickCustomProperties() {
+        cc.find('Canvas/Custom Properties Node').getComponent(CustomPropertiesUISc).open(this);
     }
 }
